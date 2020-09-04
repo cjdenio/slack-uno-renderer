@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Title</title>
+
+    <style>
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+      }
+      :root {
+        --yellow: #eae04b;
+        --blue: #1f6faa;
+        --red: #ea3c23;
+        --green: #429f44;
+      }
+      .card {
+        width: 200px;
+        height: 280px;
+        background-color: #eeeeee;
+        border-radius: 8px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        transform-origin: 0% 100%;
+
+        font-family: "Open Sans";
+        color: white;
+
+        left: 0;
+        top: 0;
+
+        /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); */
+        border: 1px solid #ddd;
+      }
+      .card.useless {
+        filter: blur(2px);
+      }
+      .inner {
+        height: 92%;
+        width: 90%;
+        border-radius: 12px;
+        box-sizing: border-box;
+        position: relative;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .inner.yellow {
+        background-color: var(--yellow);
+      }
+      .inner.green {
+        background-color: var(--green);
+      }
+      .inner.blue {
+        background-color: var(--blue);
+      }
+      .inner.red {
+        background-color: var(--red);
+      }
+      .back .inner {
+        background-color: black;
+      }
+
+      .shadow {
+        font-weight: 900;
+        font-size: 35px;
+        display: inline-block;
+        text-shadow: -2px 2px 0px black;
+        -webkit-text-stroke: 1px black;
+      }
+      .upper-num {
+        position: absolute;
+        top: 0;
+        left: 8px;
+      }
+      .lower-num {
+        position: absolute;
+        bottom: 0;
+        right: 8px;
+      }
+      .big-num {
+        font-size: 88px;
+        text-shadow: -1px 1px 0px black, -2px 2px 0px black, -3px 3px 0px black,
+          -4px 4px 0px black, -5px 5px 0px black;
+        -webkit-text-stroke: 3px black;
+        /* z-index: 1; */
+        text-align: center;
+      }
+
+      .back .big-num {
+        z-index: 1;
+      }
+
+      .oval {
+        position: absolute;
+        width: 216px;
+        height: 128px;
+        border: 6px solid white;
+        border-radius: 50%;
+        transform: rotate(-55deg);
+        top: calc(50% - 64px);
+        left: -24px;
+      }
+
+      .card.back .oval {
+        border-color: black;
+        background-color: var(--red);
+      }
+      .card.back .big-num {
+        font-size: 70px;
+        /* color: #f0d326; */
+      }
+
+      .slack {
+        font-size: 13px;
+        -webkit-text-stroke: 0 transparent;
+        text-shadow: none;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        font-style: italic;
+      }
+
+      .container {
+        border: 1px solid black;
+        width: 800px;
+        height: 480px;
+
+        display: flex;
+        flex-direction: column;
+      }
+      .cards {
+        display: flex;
+        overflow: hidden;
+        flex-basis: 300px;
+        flex-grow: 0;
+        box-sizing: border-box;
+        align-items: center;
+        padding-left: 5px;
+        position: relative;
+      }
+      .table {
+        flex-basis: 0;
+        flex-grow: 1;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        perspective: 800px;
+      }
+      .table .card {
+        transform: rotateX(45deg) translateY(-160px);
+        box-shadow: 0 10px 0 #ddd;
+      }
+
+      .cards .card {
+        position: absolute;
+        top: calc(50% - 140px);
+        left: 5px;
+      }
+      .cards .card:nth-child(2) {
+        transform: translateX(50px);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="cards">
+        {% for card in hand %}
+        <div
+          class="card {{ 'useless' if card.useless }}"
+          style="transform: translateX({{ loop.index0 * 50 }}px)"
+        >
+          <div class="inner {{ card.color }}">
+            <div class="shadow upper-num">{{ card.number }}</div>
+            <div class="oval"></div>
+            <div class="shadow big-num">{{ card.number }}</div>
+            <div class="shadow lower-num">{{ card.number }}</div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      <div class="table">
+        <div class="card back" style="margin-right: 20px">
+          <div class="inner">
+            <div class="oval"></div>
+            <div class="shadow big-num">
+              <div>UNO</div>
+              <div class="slack">Slack edition</div>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="inner {{ table.color }}">
+            <div class="shadow upper-num">{{ table.number }}</div>
+            <div class="oval"></div>
+            <div class="shadow big-num">{{ table.number }}</div>
+            <div class="shadow lower-num">{{ table.number }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
