@@ -2,7 +2,6 @@ const express = require("express");
 const nunjucks = require("nunjucks");
 const path = require("path");
 const puppeteer = require("puppeteer");
-const { json } = require("express");
 
 nunjucks.configure(path.join(__dirname, "views"), {
   watch: true,

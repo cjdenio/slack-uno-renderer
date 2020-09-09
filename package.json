@@ -1,9 +1,9 @@
 {
-  "name": "slack-uno",
+  "name": "slack-uno-renderer",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
-  "description": "Uno for Slack",
+  "description": "Card renderer for slack-uno",
   "author": "Caleb Denio",
   "dependencies": {
     "express": "^4.17.1",
