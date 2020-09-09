@@ -1,20 +1,12 @@
 {
   "name": "slack-uno-renderer",
   "version": "1.0.0",
-  "main": "index.js",
   "license": "MIT",
   "description": "Card renderer for slack-uno",
   "author": "Caleb Denio",
   "dependencies": {
-    "express": "^4.17.1",
+    "chrome-aws-lambda": "^5.2.1",
     "nunjucks": "^3.2.2",
-    "puppeteer": "^5.2.1"
-  },
-  "devDependencies": {
-    "chokidar": "^3.4.2",
-    "nodemon": "^2.0.4"
-  },
-  "scripts": {
-    "dev": "nodemon index.js"
+    "puppeteer-core": "^5.2.1"
   }
 }

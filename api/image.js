@@ -1,33 +1,21 @@
-const express = require("express");
+const puppeteer = require("puppeteer-core");
 const nunjucks = require("nunjucks");
 const path = require("path");
-const puppeteer = require("puppeteer");
+const chromium = require("chrome-aws-lambda");
 
-nunjucks.configure(path.join(__dirname, "views"), {
-  watch: true,
-});
-
-const app = express();
-
-app.get("/", (req, res) => {
-  res.contentType("html");
-  res.send(
-    nunjucks.render("index.html", {
-      hand: JSON.parse(req.query.hand),
-      table: JSON.parse(req.query.table),
-    })
-  );
-});
-
-app.get("/image", async (req, res) => {
-  const browser = await puppeteer.launch();
+module.exports = async (req, res) => {
+  const browser = await puppeteer.launch({
+    executablePath: await chromium.executablePath,
+    args: chromium.args,
+    headless: chromium.headless,
+  });
   const page = await browser.newPage();
   await page.setViewport({
     width: 800,
     height: 480,
   });
   await page.setContent(
-    nunjucks.render("index.html", {
+    nunjucks.render(path.join(__dirname, "../views", "index.html"), {
       hand: JSON.parse(req.query.hand),
       table: JSON.parse(req.query.table),
     })
@@ -43,6 +31,4 @@ app.get("/image", async (req, res) => {
   res.send(screenshot);
 
   await browser.close();
-});
-
-app.listen(8080, () => console.log("woot"));
+};
