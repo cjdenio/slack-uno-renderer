@@ -20,7 +20,7 @@ module.exports = async (req, res) => {
       table: JSON.parse(req.query.table),
     })
   );
-  const screenshot = await page.screenshot();
+  const screenshot = await page.screenshot({ omitBackground: true });
 
   res.setHeader("Content-Type", "image/png");
   res.setHeader(
