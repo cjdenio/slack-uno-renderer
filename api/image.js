@@ -1,14 +1,20 @@
-const puppeteer = require("puppeteer-core");
 const nunjucks = require("nunjucks");
 const path = require("path");
-const chromium = require("chrome-aws-lambda");
 
-module.exports = async (req, res) => {
-  const browser = await puppeteer.launch({
-    executablePath: await chromium.executablePath,
-    args: chromium.args,
-    headless: chromium.headless,
-  });
+module.exports = async (req, res, dev) => {
+  let browser;
+  if (dev) {
+    const puppeteer = require("puppeteer");
+    browser = await puppeteer.launch();
+  } else {
+    const puppeteer = require("puppeteer-core");
+    const chromium = require("chrome-aws-lambda");
+    browser = await puppeteer.launch({
+      executablePath: await chromium.executablePath,
+      args: chromium.args,
+      headless: chromium.headless,
+    });
+  }
   const page = await browser.newPage();
   await page.setViewport({
     width: 800,
@@ -18,7 +24,10 @@ module.exports = async (req, res) => {
     nunjucks.render(path.join(__dirname, "../views", "index.html"), {
       hand: JSON.parse(req.query.hand),
       table: JSON.parse(req.query.table),
-    })
+    }),
+    {
+      waitUntil: "networkidle0",
+    }
   );
   const screenshot = await page.screenshot({ omitBackground: true });
 

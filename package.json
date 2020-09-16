@@ -8,5 +8,13 @@
     "chrome-aws-lambda": "^5.2.1",
     "nunjucks": "^3.2.2",
     "puppeteer-core": "^5.2.1"
+  },
+  "scripts": {
+    "dev": "nodemon dev.js"
+  },
+  "devDependencies": {
+    "express": "^4.17.1",
+    "nodemon": "^2.0.4",
+    "puppeteer": "^5.3.0"
   }
 }

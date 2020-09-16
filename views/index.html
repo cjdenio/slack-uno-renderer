@@ -1,7 +1,12 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Title</title>
+    <title>slack-uno renderer</title>
+
+    <script
+      src="https://kit.fontawesome.com/921bd8fdbd.js"
+      crossorigin="anonymous"
+    ></script>
 
     <style>
       html,
@@ -174,10 +179,22 @@
           style="transform: translateX({{ loop.index0 * 50 }}px)"
         >
           <div class="inner {{ card.color }}">
-            <div class="shadow upper-num">{{ card.number }}</div>
+            <div class="shadow upper-num">
+              {% if card.number == "skip" %}
+              <i class="fas fa-ban"></i>
+              {% else %} {{ card.number }} {% endif %}
+            </div>
             <div class="oval"></div>
-            <div class="shadow big-num">{{ card.number }}</div>
-            <div class="shadow lower-num">{{ card.number }}</div>
+            <div class="shadow big-num">
+              {% if card.number == "skip" %}
+              <i class="fas fa-ban"></i>
+              {% else %} {{ card.number }} {% endif %}
+            </div>
+            <div class="shadow lower-num">
+              {% if card.number == "skip" %}
+              <i class="fas fa-ban"></i>
+              {% else %} {{ card.number }} {% endif %}
+            </div>
           </div>
         </div>
         {% endfor %}
@@ -194,10 +211,22 @@
         </div>
         <div class="card">
           <div class="inner {{ table.color }}">
-            <div class="shadow upper-num">{{ table.number }}</div>
+            <div class="shadow upper-num">
+              {% if table.number == "skip" %}
+              <i class="fas fa-ban"></i>
+              {% else %} {{ table.number }} {% endif %}
+            </div>
             <div class="oval"></div>
-            <div class="shadow big-num">{{ table.number }}</div>
-            <div class="shadow lower-num">{{ table.number }}</div>
+            <div class="shadow big-num">
+              {% if table.number == "skip" %}
+              <i class="fas fa-ban"></i>
+              {% else %} {{ table.number }} {% endif %}
+            </div>
+            <div class="shadow lower-num">
+              {% if table.number == "skip" %}
+              <i class="fas fa-ban"></i>
+              {% else %} {{ table.number }} {% endif %}
+            </div>
           </div>
         </div>
       </div>
