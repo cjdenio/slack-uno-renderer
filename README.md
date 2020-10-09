@@ -1,6 +1,6 @@
 # slack-uno-renderer
 
-Card renderer for [slack-uno](https://github.com/cjdenio/slack-uno), a WIP Uno-like game for Slack.
+Card renderer for [slack-uno](https://github.com/cjdenio/slack-uno), an Uno-like game for Slack.
 
 Live example:
 

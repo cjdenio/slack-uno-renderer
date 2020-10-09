@@ -3,12 +3,12 @@
   <head>
     <title>slack-uno renderer</title>
 
-    <script
-      src="https://kit.fontawesome.com/921bd8fdbd.js"
-      crossorigin="anonymous"
-    ></script>
-
     <style>
+      @font-face {
+        font-family: "Font Awesome 5 Free";
+        src: url("data:font/ttf;base64,{{fontAwesome}}");
+      }
+
       html,
       body {
         height: 100%;
@@ -168,6 +168,10 @@
       .cards .card:nth-child(2) {
         transform: translateX(50px);
       }
+      .fas {
+        font-family: "Font Awesome 5 Free";
+        font-style: normal;
+      }
     </style>
   </head>
   <body>
@@ -181,18 +185,18 @@
           <div class="inner {{ card.color }}">
             <div class="shadow upper-num">
               {% if card.number == "skip" %}
-              <i class="fas fa-ban"></i>
+              <i class="fas fa-ban"></i>
               {% else %} {{ card.number }} {% endif %}
             </div>
             <div class="oval"></div>
             <div class="shadow big-num">
               {% if card.number == "skip" %}
-              <i class="fas fa-ban"></i>
+              <i class="fas fa-ban"></i>
               {% else %} {{ card.number }} {% endif %}
             </div>
             <div class="shadow lower-num">
               {% if card.number == "skip" %}
-              <i class="fas fa-ban"></i>
+              <i class="fas fa-ban"></i>
               {% else %} {{ card.number }} {% endif %}
             </div>
           </div>
@@ -213,18 +217,18 @@
           <div class="inner {{ table.color }}">
             <div class="shadow upper-num">
               {% if table.number == "skip" %}
-              <i class="fas fa-ban"></i>
+              <i class="fas fa-ban"></i>
               {% else %} {{ table.number }} {% endif %}
             </div>
             <div class="oval"></div>
             <div class="shadow big-num">
               {% if table.number == "skip" %}
-              <i class="fas fa-ban"></i>
+              <i class="fas fa-ban"></i>
               {% else %} {{ table.number }} {% endif %}
             </div>
             <div class="shadow lower-num">
               {% if table.number == "skip" %}
-              <i class="fas fa-ban"></i>
+              <i class="fas fa-ban"></i>
               {% else %} {{ table.number }} {% endif %}
             </div>
           </div>

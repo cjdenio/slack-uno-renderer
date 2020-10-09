@@ -1,5 +1,6 @@
 const nunjucks = require("nunjucks");
 const path = require("path");
+const fs = require("fs");
 
 module.exports = async (req, res, dev) => {
   let browser;
@@ -20,14 +21,18 @@ module.exports = async (req, res, dev) => {
     width: 800,
     height: 480,
   });
+  const fontAwesomePath = path.join(
+    __dirname,
+    "..",
+    "_lib",
+    "fa-solid-900.ttf"
+  );
   await page.setContent(
     nunjucks.render(path.join(__dirname, "../views", "index.html"), {
       hand: JSON.parse(req.query.hand),
       table: JSON.parse(req.query.table),
-    }),
-    {
-      waitUntil: "networkidle0",
-    }
+      fontAwesome: fs.readFileSync(fontAwesomePath).toString("base64"),
+    })
   );
   const screenshot = await page.screenshot({ omitBackground: true });
 
