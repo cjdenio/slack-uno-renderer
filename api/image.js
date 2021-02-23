@@ -32,6 +32,9 @@ module.exports = async (req, res, dev) => {
       hand: JSON.parse(req.query.hand),
       table: JSON.parse(req.query.table),
       fontAwesome: fs.readFileSync(fontAwesomePath).toString("base64"),
+      wildBackground: fs
+        .readFileSync(path.join(__dirname, "..", "_lib", "wild.svg"))
+        .toString("base64"),
     })
   );
   const screenshot = await page.screenshot({ omitBackground: true });

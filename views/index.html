@@ -41,6 +41,14 @@
         /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); */
         border: 1px solid #ddd;
       }
+
+      .card.wild .oval {
+        background-image: url("data:image/svg+xml;base64,{{ wildBackground }}");
+      }
+      .card.wild .inner {
+        background-color: black !important;
+      }
+
       .card.useless {
         filter: blur(2px);
       }
@@ -95,6 +103,7 @@
         -webkit-text-stroke: 3px black;
         /* z-index: 1; */
         text-align: center;
+        z-index: 1;
       }
 
       .back .big-num {
@@ -103,13 +112,13 @@
 
       .oval {
         position: absolute;
-        width: 216px;
-        height: 128px;
+        height: 216px;
+        width: 128px;
         border: 6px solid white;
         border-radius: 50%;
-        transform: rotate(-55deg);
-        top: calc(50% - 64px);
-        left: -24px;
+        transform: rotate(35deg);
+        top: calc(50% - 110px);
+        left: 20px;
       }
 
       .card.back .oval {
@@ -179,24 +188,30 @@
       <div class="cards">
         {% for card in hand %}
         <div
-          class="card {{ 'useless' if card.useless }}"
+          class="card {{ 'useless' if card.useless }} {{ 'wild' if card.number == 'wild' }}"
           style="transform: translateX({{ loop.index0 * 50 }}px)"
         >
           <div class="inner {{ card.color }}">
             <div class="shadow upper-num">
               {% if card.number == "skip" %}
               <i class="fas fa-ban"></i>
+              {% elif card.number == "wild" %}
+              <i class="fas fa-ban"></i>
               {% else %} {{ card.number }} {% endif %}
             </div>
             <div class="oval"></div>
             <div class="shadow big-num">
               {% if card.number == "skip" %}
               <i class="fas fa-ban"></i>
+              {% elif card.number == "wild" %}
+              <i class="fas fa-ban"></i>
               {% else %} {{ card.number }} {% endif %}
             </div>
             <div class="shadow lower-num">
               {% if card.number == "skip" %}
               <i class="fas fa-ban"></i>
+              {% elif card.number == "wild" %}
+              <i class="fas fa-ban"></i>
               {% else %} {{ card.number }} {% endif %}
             </div>
           </div>
@@ -213,22 +228,28 @@
             </div>
           </div>
         </div>
-        <div class="card">
+        <div class="card {{ 'wild' if table.number == 'wild' }}">
           <div class="inner {{ table.color }}">
             <div class="shadow upper-num">
               {% if table.number == "skip" %}
               <i class="fas fa-ban"></i>
+              {% elif table.number == "wild" %}
+              <i class="fas fa-ban"></i>
               {% else %} {{ table.number }} {% endif %}
             </div>
             <div class="oval"></div>
             <div class="shadow big-num">
               {% if table.number == "skip" %}
               <i class="fas fa-ban"></i>
+              {% elif table.number == "wild" %}
+              <i class="fas fa-ban"></i>
               {% else %} {{ table.number }} {% endif %}
             </div>
             <div class="shadow lower-num">
               {% if table.number == "skip" %}
               <i class="fas fa-ban"></i>
+              {% elif table.number == "wild" %}
+              <i class="fas fa-ban"></i>
               {% else %} {{ table.number }} {% endif %}
             </div>
           </div>
